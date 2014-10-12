@@ -1,22 +1,198 @@
-# marked
+# marked-pax
 
-> A full-featured markdown parser and compiler, written in JavaScript. Built
-> for speed.
+marked-pax is augmented version of [marked](https://github.com/chjj/marked).
 
-[![NPM version](https://badge.fury.io/js/marked.png)][badge]
+## Changes
 
-## Install
+### GFM-style headers
 
-``` bash
-npm install marked --save
-```
+Original behaviour:
+
+````bash
+$ echo '#foo' | marked
+<h1 id="foo">foo</h1>
+
+````
+
+GFM-style:
+
+````bash
+$ echo '
+#Header
+# Header
+#  Header
+' | marked-pax
+<p>#Header</p>
+<h1 id="header">Header</h1>
+<h1 id="header">Header</h1>
+
+````
+
+### &tl; and &gt; escapes
+
+Source: '\<\>', result: '&lt;&gt;'.
+
+## New syntax
+
+### Headers with anchors
+
+Source:
+
+````markdown
+# ^chapter-1 Случайный Юпитер — актуальная национальная задача
+
+^chapter2 Астероидный возмущающий фактор в XXI веке
+===================================================
+````
+
+Renderer method: `heading (text, level, raw, anchor)`
+
+### KaTeX formulas
+
+Source:
+
+````markdown
+$
+\KaTeX
+$
+
+$\text{[links](not works)}$
+````
+
+Result:
+
+````html
+<p><span class="katex"><span class="katex-inner"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:1.0302031249999999em;vertical-align:-0.34687312499999995em;"></span><span class="base textstyle uncramped"><span class="katex-logo"><span class="k">K</span><span class="a">A</span><span class="t">T</span><span class="e">E</span><span class="x">X</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-inner"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="text mord textstyle uncramped"><span class="mord">[</span><span class="mord">l</span><span class="mord">i</span><span class="mord">n</span><span class="mord">k</span><span class="mord">s</span><span class="mord">]</span><span class="mord">(</span><span class="mord">n</span><span class="mord">o</span><span class="mord">t</span><span class="mord mspace"> </span><span class="mord" style="margin-right:0.01389em;">w</span><span class="mord">o</span><span class="mord">r</span><span class="mord">k</span><span class="mord">s</span><span class="mord">)</span></span></span></span></span></p>
+````
+
+Renderer method: `katex (source)`
+
+### Colored text
+
+Supported all CSS-compatible color notations:
+
+ *  `#rrggbb`
+ *  `#rgb`
+ *  `rgb(r, g, b)`
+ *  `rgb(r%, g%, b%)`
+ *  `rgba(r, g, b, a)`
+ *  `rgba(r%, g%, b%, a)`
+ *  `hsl(h, s, l)`
+ *  `hsl(h%, s%, l%)`
+ *  `hsla(h, s, l, a)`
+ *  `hsla(h%, s%, l%, a)`
+ *  `colorName`
+
+#### Text color
+
+Source:
+
+````markdown
+%red Red text%
+````
+
+Result:
+
+````html
+<p><span style="color:red">Red text</span></p>
+````
+
+Renderer method: `color (color, text)`
+
+#### Background color
+
+Source:
+
+````markdown
+!%yellow Yellow background%
+````
+
+Result:
+
+````html
+<p><span style="background-color:yellow">Yellow background</span></p>
+````
+
+Renderer method: `bg (color, text)`
+
+### Ruby (furigana) and glosses
+
+### Ruby
+
+Source:
+
+````markdown
+{東}(とう){方}(とう)
+````
+
+Result:
+
+````html
+<p><ruby>東<rt>とう</rt></ruby><ruby>方<rt>とう</rt></ruby></p>
+````
+
+Renderer method: `ruby (color, ruby)`
+
+### Glosses
+
+Source:
+
+````markdown
+!{Word or phrase}(Pop-up description)
+````
+
+Result:
+
+````html
+<p><span class="gloss" title="Pop-up description">Word or phrase</span></p>
+````
+
+Renderer method: `gloss (color, gloss)`
+
+NB: By default, HTML in glosses not supported. You may override default renderer method
+for supporting custom pop-ups.
+
+### Empty anchors
+
+Source:
+
+````markdown
+ *  Item 1
+ *  Item 2
+ *  ^item-3 Item 3
+     *  Item 3.1
+     *  Item 3.2
+````
+
+Result:
+
+````html
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li><span id="item-3" />Item 3<ul>
+<li>Item 3.1</li>
+<li>Item 3.2</li>
+</ul>
+</li>
+</ul>
+````
+
+Renderer method: `anchor (id)`
+
+## TODO
+
+ *  Hashtags: `#hashtag`.
+ *  Total rewrite with XRegExp library.
+ *  Add support for Japanese punctuation.
 
 ## Usage
 
 Minimal usage:
 
 ```js
-var marked = require('marked');
+var marked = require('marked-pax');
 console.log(marked('I am using __markdown__.'));
 // Outputs: <p>I am using <strong>markdown</strong>.</p>
 ```
@@ -24,7 +200,7 @@ console.log(marked('I am using __markdown__.'));
 Example setting options with default values:
 
 ```js
-var marked = require('marked');
+var marked = require('marked-pax');
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -47,7 +223,7 @@ console.log(marked('I am using __markdown__.'));
 <head>
   <meta charset="utf-8"/>
   <title>Marked in the browser</title>
-  <script src="lib/marked.js"></script>
+  <script src="lib/marked-pax.js"></script>
 </head>
 <body>
   <div id="content"></div>
@@ -58,6 +234,18 @@ console.log(marked('I am using __markdown__.'));
 </body>
 </html>
 ```
+
+Result:
+
+````html
+<h1 id="chapter-1">Случайный Юпитер — актуальная национальная задача</h1>
+<h1 id="chapter2">Астероидный возмущающий фактор в XXI веке</h1>
+````
+
+# marked
+
+> A full-featured markdown parser and compiler, written in JavaScript. Built
+> for speed.
 
 ## marked(markdownString [,options] [,callback])
 

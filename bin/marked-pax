@@ -24,7 +24,7 @@ function help() {
   };
 
   spawn('man',
-    [__dirname + '/../man/marked.1'],
+    [__dirname + '/../man/marked-pax.1'],
     options);
 }
 
@@ -177,7 +177,7 @@ function camelize(text) {
  */
 
 if (!module.parent) {
-  process.title = 'marked';
+  process.title = 'marked-pex';
   main(process.argv.slice(), function(err, code) {
     if (err) throw err;
     return process.exit(code || 0);
