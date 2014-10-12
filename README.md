@@ -45,9 +45,14 @@ Source:
 ===================================================
 ````
 
+````html
+<h1 id="chapter-1">Случайный Юпитер — актуальная национальная задача</h1>
+<h1 id="chapter2">Астероидный возмущающий фактор в XXI веке</h1>
+````
+
 Renderer method: `heading (text, level, raw, anchor)`
 
-### KaTeX formulas
+### [KaTeX](http://khan.github.io/KaTeX) formulas
 
 Source:
 
