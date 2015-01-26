@@ -1,7 +1,7 @@
 {
   "name": "marked-pax",
   "description": "A markdown parser built for speed",
-  "author": "Yuri Hater",
+  "author": "Yuri Hater <paxidently@yandex.com>",
   "version": "0.3.2",
   "main": "./lib/marked-pax.js",
   "bin": "./bin/marked-pax",
@@ -13,8 +13,11 @@
   "license": "MIT",
   "keywords": ["markdown", "markup", "html"],
   "tags": ["markdown", "markup", "html"],
-  "devDependencies": {
+  "dependencies": {
     "katex": "0.1.x",
+    "xregexp": "2.0.x"
+  },
+  "devDependencies": {
     "markdown": "*",
     "showdown": "*",
     "robotskirt": "*"
