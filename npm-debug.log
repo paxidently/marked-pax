@@ -1,26 +1,81 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'publish' ]
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'unpublish',
+1 verbose cli   'marked-pax',
+1 verbose cli   '--force' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
 4 verbose node symlink /usr/bin/node
-5 verbose publish [ '.' ]
-6 error Error: Invalid version: "0.3.2.1"
-6 error     at Object.module.exports.fixVersionField (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/fixer.js:183:13)
-6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:30:38
-6 error     at Array.forEach (native)
-6 error     at normalize (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:29:15)
-6 error     at final (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:342:33)
-6 error     at then (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:126:33)
-6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:331:40
-6 error     at evalmachine.<anonymous>:271:14
-6 error     at /usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
-6 error     at Object.oncomplete (evalmachine.<anonymous>:107:15)
-7 error If you need help, you may report this *entire* log,
-7 error including the npm and node versions, at:
-7 error     <http://github.com/npm/npm/issues>
-8 error System Linux 3.13.0-45-generic
-9 error command "/usr/bin/node" "/usr/bin/npm" "publish"
-10 error cwd /tdd/projects/node/marked-pax
-11 error node -v v0.10.33
-12 error npm -v 1.4.28
-13 verbose exit [ 1, true ]
+5 warn using --force I sure hope you know what you are doing.
+6 verbose request where is /marked-pax?write=true
+7 verbose request registry https://registry.npmjs.org/
+8 verbose request id f18cc77ddacfe315
+9 verbose url raw /marked-pax?write=true
+10 verbose url resolving [ 'https://registry.npmjs.org/', './marked-pax?write=true' ]
+11 verbose url resolved https://registry.npmjs.org/marked-pax?write=true
+12 verbose request where is https://registry.npmjs.org/marked-pax?write=true
+13 info trying registry request attempt 1 at 11:54:56
+14 http GET https://registry.npmjs.org/marked-pax?write=true
+15 http 404 https://registry.npmjs.org/marked-pax?write=true
+16 silly registry.get cb [ 404,
+16 silly registry.get   { date: 'Mon, 26 Jan 2015 08:54:57 GMT',
+16 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+16 silly registry.get     etag: '"21CMWO622AHD2LQYCAKUAOOVZ"',
+16 silly registry.get     'content-type': 'application/json',
+16 silly registry.get     'cache-control': 'max-age=0',
+16 silly registry.get     'content-length': '458',
+16 silly registry.get     'accept-ranges': 'bytes',
+16 silly registry.get     via: '1.1 varnish',
+16 silly registry.get     age: '0',
+16 silly registry.get     'x-served-by': 'cache-fra1240-FRA',
+16 silly registry.get     'x-cache': 'MISS',
+16 silly registry.get     'x-cache-hits': '0',
+16 silly registry.get     'x-timer': 'S1422262496.933193,VS0,VE177',
+16 silly registry.get     vary: 'Accept',
+16 silly registry.get     'keep-alive': 'timeout=10, max=50',
+16 silly registry.get     connection: 'Keep-Alive' } ]
+17 info unpublish No version specified, removing all
+18 verbose request where is /marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+19 verbose request registry https://registry.npmjs.org/
+20 verbose url raw /marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+21 verbose url resolving [ 'https://registry.npmjs.org/',
+21 verbose url resolving   './marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345' ]
+22 verbose url resolved https://registry.npmjs.org/marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+23 verbose request where is https://registry.npmjs.org/marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+24 info trying registry request attempt 1 at 11:54:57
+25 http DELETE https://registry.npmjs.org/marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+26 http 403 https://registry.npmjs.org/marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+27 verbose headers { date: 'Mon, 26 Jan 2015 08:54:57 GMT',
+27 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 verbose headers   'content-type': 'application/json',
+27 verbose headers   'cache-control': 'max-age=60',
+27 verbose headers   'content-length': '53',
+27 verbose headers   'accept-ranges': 'bytes',
+27 verbose headers   via: '1.1 varnish',
+27 verbose headers   'x-served-by': 'cache-fra1228-FRA',
+27 verbose headers   'x-cache': 'MISS',
+27 verbose headers   'x-cache-hits': '0',
+27 verbose headers   'x-timer': 'S1422262497.441879,VS0,VE191',
+27 verbose headers   'keep-alive': 'timeout=10, max=50',
+27 verbose headers   connection: 'Keep-Alive' }
+28 error Error: forbidden already unpublished: marked-pax/-rev/3-82895a5aa665c30ca51b3732fd197345
+28 error     at RegClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+28 error     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+28 error     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:236:22)
+28 error     at Request.emit (events.js:98:17)
+28 error     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+28 error     at Request.emit (events.js:117:20)
+28 error     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+28 error     at IncomingMessage.emit (events.js:117:20)
+28 error     at _stream_readable.js:943:16
+28 error     at process._tickCallback (node.js:419:13)
+29 error If you need help, you may report this *entire* log,
+29 error including the npm and node versions, at:
+29 error     <http://github.com/npm/npm/issues>
+30 error System Linux 3.13.0-45-generic
+31 error command "/usr/bin/node" "/usr/bin/npm" "unpublish" "marked-pax" "--force"
+32 error cwd /tdd/projects/node/marked-pax
+33 error node -v v0.10.33
+34 error npm -v 1.4.28
+35 verbose exit [ 1, true ]

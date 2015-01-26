@@ -2,7 +2,7 @@
   "name": "marked-pax",
   "description": "A markdown parser built for speed",
   "author": "Yuri Hater <paxidently@yandex.com>",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "./lib/marked-pax.js",
   "bin": "./bin/marked-pax",
   "man": "./man/marked-pax.1",
